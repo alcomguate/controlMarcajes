@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="CONTROL_MARCAJEModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="CONTROL_MARCAJEEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Empleadoes" EntityType="CONTROL_MARCAJEModel.Empleado" />
+    <EntitySet Name="Marcajes" EntityType="CONTROL_MARCAJEModel.Marcaje" />
+    <AssociationSet Name="FK_Marcaje_Empleado" Association="CONTROL_MARCAJEModel.FK_Marcaje_Empleado">
+      <End Role="Empleado" EntitySet="Empleadoes" />
+      <End Role="Marcaje" EntitySet="Marcajes" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Empleado">
+    <Key>
+      <PropertyRef Name="num_empleado" />
+    </Key>
+    <Property Name="num_empleado" Type="Int32" Nullable="false" />
+    <Property Name="nombre_completo" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="telefono" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Name="direccion" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="genero" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Name="ultimo_marcaje" Type="DateTime" Precision="0" />
+    <Property Name="activo" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Marcajes" Relationship="CONTROL_MARCAJEModel.FK_Marcaje_Empleado" FromRole="Empleado" ToRole="Marcaje" />
+  </EntityType>
+  <EntityType Name="Marcaje">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="empleado" Type="Int32" />
+    <Property Name="dia_laboral" Type="DateTime" Precision="0" />
+    <Property Name="hora_entrada" Type="Time" Precision="7" />
+    <Property Name="hora_entrada_almuerzo" Type="Time" Precision="7" />
+    <Property Name="hora_salida_almuerzo" Type="Time" Precision="7" />
+    <Property Name="hora_salida" Type="Time" Precision="7" />
+    <NavigationProperty Name="Empleado1" Relationship="CONTROL_MARCAJEModel.FK_Marcaje_Empleado" FromRole="Marcaje" ToRole="Empleado" />
+  </EntityType>
+  <Association Name="FK_Marcaje_Empleado">
+    <End Type="CONTROL_MARCAJEModel.Empleado" Role="Empleado" Multiplicity="0..1" />
+    <End Type="CONTROL_MARCAJEModel.Marcaje" Role="Marcaje" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Empleado">
+        <PropertyRef Name="num_empleado" />
+      </Principal>
+      <Dependent Role="Marcaje">
+        <PropertyRef Name="empleado" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

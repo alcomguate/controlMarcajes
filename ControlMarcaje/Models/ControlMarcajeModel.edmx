@@ -1,0 +1,157 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="CONTROL_MARCAJEModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Empleado">
+          <Key>
+            <PropertyRef Name="num_empleado" />
+          </Key>
+          <Property Name="num_empleado" Type="int" Nullable="false" />
+          <Property Name="nombre_completo" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="telefono" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="direccion" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="genero" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="ultimo_marcaje" Type="date" />
+          <Property Name="activo" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Marcaje">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="empleado" Type="int" />
+          <Property Name="dia_laboral" Type="date" />
+          <Property Name="hora_entrada" Type="time" Precision="7" />
+          <Property Name="hora_entrada_almuerzo" Type="time" Precision="7" />
+          <Property Name="hora_salida_almuerzo" Type="time" Precision="7" />
+          <Property Name="hora_salida" Type="time" Precision="7" />
+        </EntityType>
+        <Association Name="FK_Marcaje_Empleado">
+          <End Role="Empleado" Type="Self.Empleado" Multiplicity="0..1" />
+          <End Role="Marcaje" Type="Self.Marcaje" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empleado">
+              <PropertyRef Name="num_empleado" />
+            </Principal>
+            <Dependent Role="Marcaje">
+              <PropertyRef Name="empleado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CONTROL_MARCAJEModelStoreContainer">
+          <EntitySet Name="Empleado" EntityType="Self.Empleado" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Marcaje" EntityType="Self.Marcaje" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Marcaje_Empleado" Association="Self.FK_Marcaje_Empleado">
+            <End Role="Empleado" EntitySet="Empleado" />
+            <End Role="Marcaje" EntitySet="Marcaje" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CONTROL_MARCAJEModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="CONTROL_MARCAJEEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Empleadoes" EntityType="CONTROL_MARCAJEModel.Empleado" />
+          <EntitySet Name="Marcajes" EntityType="CONTROL_MARCAJEModel.Marcaje" />
+          <AssociationSet Name="FK_Marcaje_Empleado" Association="CONTROL_MARCAJEModel.FK_Marcaje_Empleado">
+            <End Role="Empleado" EntitySet="Empleadoes" />
+            <End Role="Marcaje" EntitySet="Marcajes" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Empleado">
+          <Key>
+            <PropertyRef Name="num_empleado" />
+          </Key>
+          <Property Name="num_empleado" Type="Int32" Nullable="false" />
+          <Property Name="nombre_completo" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="telefono" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="direccion" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="genero" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="ultimo_marcaje" Type="DateTime" Precision="0" />
+          <Property Name="activo" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Marcajes" Relationship="CONTROL_MARCAJEModel.FK_Marcaje_Empleado" FromRole="Empleado" ToRole="Marcaje" />
+        </EntityType>
+        <EntityType Name="Marcaje">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="empleado" Type="Int32" />
+          <Property Name="dia_laboral" Type="DateTime" Precision="0" />
+          <Property Name="hora_entrada" Type="Time" Precision="7" />
+          <Property Name="hora_entrada_almuerzo" Type="Time" Precision="7" />
+          <Property Name="hora_salida_almuerzo" Type="Time" Precision="7" />
+          <Property Name="hora_salida" Type="Time" Precision="7" />
+          <NavigationProperty Name="Empleado1" Relationship="CONTROL_MARCAJEModel.FK_Marcaje_Empleado" FromRole="Marcaje" ToRole="Empleado" />
+        </EntityType>
+        <Association Name="FK_Marcaje_Empleado">
+          <End Type="CONTROL_MARCAJEModel.Empleado" Role="Empleado" Multiplicity="0..1" />
+          <End Type="CONTROL_MARCAJEModel.Marcaje" Role="Marcaje" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empleado">
+              <PropertyRef Name="num_empleado" />
+            </Principal>
+            <Dependent Role="Marcaje">
+              <PropertyRef Name="empleado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="CONTROL_MARCAJEModelStoreContainer" CdmEntityContainer="CONTROL_MARCAJEEntities">
+          <EntitySetMapping Name="Empleadoes">
+            <EntityTypeMapping TypeName="CONTROL_MARCAJEModel.Empleado">
+              <MappingFragment StoreEntitySet="Empleado">
+                <ScalarProperty Name="activo" ColumnName="activo" />
+                <ScalarProperty Name="ultimo_marcaje" ColumnName="ultimo_marcaje" />
+                <ScalarProperty Name="genero" ColumnName="genero" />
+                <ScalarProperty Name="direccion" ColumnName="direccion" />
+                <ScalarProperty Name="telefono" ColumnName="telefono" />
+                <ScalarProperty Name="nombre_completo" ColumnName="nombre_completo" />
+                <ScalarProperty Name="num_empleado" ColumnName="num_empleado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Marcajes">
+            <EntityTypeMapping TypeName="CONTROL_MARCAJEModel.Marcaje">
+              <MappingFragment StoreEntitySet="Marcaje">
+                <ScalarProperty Name="hora_salida" ColumnName="hora_salida" />
+                <ScalarProperty Name="hora_salida_almuerzo" ColumnName="hora_salida_almuerzo" />
+                <ScalarProperty Name="hora_entrada_almuerzo" ColumnName="hora_entrada_almuerzo" />
+                <ScalarProperty Name="hora_entrada" ColumnName="hora_entrada" />
+                <ScalarProperty Name="dia_laboral" ColumnName="dia_laboral" />
+                <ScalarProperty Name="empleado" ColumnName="empleado" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="CONTROL_MARCAJEModelStoreContainer" CdmEntityContainer="CONTROL_MARCAJEEntities">
+    <EntitySetMapping Name="Empleadoes">
+      <EntityTypeMapping TypeName="CONTROL_MARCAJEModel.Empleado">
+        <MappingFragment StoreEntitySet="Empleado">
+          <ScalarProperty Name="activo" ColumnName="activo" />
+          <ScalarProperty Name="ultimo_marcaje" ColumnName="ultimo_marcaje" />
+          <ScalarProperty Name="genero" ColumnName="genero" />
+          <ScalarProperty Name="direccion" ColumnName="direccion" />
+          <ScalarProperty Name="telefono" ColumnName="telefono" />
+          <ScalarProperty Name="nombre_completo" ColumnName="nombre_completo" />
+          <ScalarProperty Name="num_empleado" ColumnName="num_empleado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Marcajes">
+      <EntityTypeMapping TypeName="CONTROL_MARCAJEModel.Marcaje">
+        <MappingFragment StoreEntitySet="Marcaje">
+          <ScalarProperty Name="hora_salida" ColumnName="hora_salida" />
+          <ScalarProperty Name="hora_salida_almuerzo" ColumnName="hora_salida_almuerzo" />
+          <ScalarProperty Name="hora_entrada_almuerzo" ColumnName="hora_entrada_almuerzo" />
+          <ScalarProperty Name="hora_entrada" ColumnName="hora_entrada" />
+          <ScalarProperty Name="dia_laboral" ColumnName="dia_laboral" />
+          <ScalarProperty Name="empleado" ColumnName="empleado" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

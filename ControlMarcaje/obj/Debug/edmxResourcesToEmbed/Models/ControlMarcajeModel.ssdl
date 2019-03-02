@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="CONTROL_MARCAJEModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Empleado">
+    <Key>
+      <PropertyRef Name="num_empleado" />
+    </Key>
+    <Property Name="num_empleado" Type="int" Nullable="false" />
+    <Property Name="nombre_completo" Type="varchar" MaxLength="250" Nullable="false" />
+    <Property Name="telefono" Type="varchar" MaxLength="25" Nullable="false" />
+    <Property Name="direccion" Type="varchar" MaxLength="150" Nullable="false" />
+    <Property Name="genero" Type="char" MaxLength="1" Nullable="false" />
+    <Property Name="ultimo_marcaje" Type="date" />
+    <Property Name="activo" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Marcaje">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="empleado" Type="int" />
+    <Property Name="dia_laboral" Type="date" />
+    <Property Name="hora_entrada" Type="time" Precision="7" />
+    <Property Name="hora_entrada_almuerzo" Type="time" Precision="7" />
+    <Property Name="hora_salida_almuerzo" Type="time" Precision="7" />
+    <Property Name="hora_salida" Type="time" Precision="7" />
+  </EntityType>
+  <Association Name="FK_Marcaje_Empleado">
+    <End Role="Empleado" Type="Self.Empleado" Multiplicity="0..1" />
+    <End Role="Marcaje" Type="Self.Marcaje" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Empleado">
+        <PropertyRef Name="num_empleado" />
+      </Principal>
+      <Dependent Role="Marcaje">
+        <PropertyRef Name="empleado" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="CONTROL_MARCAJEModelStoreContainer">
+    <EntitySet Name="Empleado" EntityType="Self.Empleado" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Marcaje" EntityType="Self.Marcaje" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Marcaje_Empleado" Association="Self.FK_Marcaje_Empleado">
+      <End Role="Empleado" EntitySet="Empleado" />
+      <End Role="Marcaje" EntitySet="Marcaje" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
