@@ -1,0 +1,55 @@
+﻿@model IEnumerable<ControlMarcaje.Models.Marcaje>
+
+
+@{
+    ViewBag.Title = "Control de marcajes";
+}
+
+<br />
+
+<h2 class="text-center text-capitalize">@Html.DisplayFor(model => model.FirstOrDefault().Empleado1.nombre_completo)</h2>
+
+<br />
+
+<div class="row">
+    <div class="col-sm-3">
+        <div class="card text-center">
+            <img src="http://chittagongit.com//images/entrance-icon-png/entrance-icon-png-24.jpg" class="card-img-top" alt="Entrada">
+            <div class="card-body text-center">
+                <h5 class="card-title">Entrada</h5>
+                <a href="#" class="btn btn-primary">Marcar</a>
+                <p class="card-text">@Html.DisplayFor(model => model.FirstOrDefault().hora_entrada)</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-3">
+        <div class="card text-center">
+            <img src="http://chittagongit.com//images/lunch-icon-png/lunch-icon-png-29.jpg" class="card-img-top" alt="Entrada" style="width:200px; text-align:center">
+            <div class="card-body text-center">
+                <h5 class="card-title">Entrada almuerzo</h5>
+                <a href="#" class="btn btn-primary">Marcar</a>
+                <p class="card-text">@Html.DisplayFor(model => model.FirstOrDefault().hora_entrada_almuerzo)</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-3">
+        <div class="card text-center">
+            <img src="http://chittagongit.com//images/lunch-icon-png/lunch-icon-png-29.jpg" class="card-img-top" alt="Entrada" style="width:200px; text-align:center">
+            <div class="card-body text-center">
+                <h5 class="card-title">Salida almuerzo</h5>
+                <a href="#" class="btn btn-primary">Marcar</a>
+                <p class="card-text">@Html.DisplayFor(model => model.FirstOrDefault().hora_salida_almuerzo)</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-3">
+        <div class="card text-center">
+            <img src="http://chittagongit.com//images/icon-exit/icon-exit-24.jpg" class="card-img-top" alt="Entrada">
+            <div class="card-body text-center">
+                <h5 class="card-title">Salida</h5>
+                <a href="#" class="btn btn-primary">Marcar</a>
+                <p class="card-text">@Html.DisplayFor(model => model.FirstOrDefault().hora_salida)</p>
+            </div>
+        </div>
+    </div>
+</div>

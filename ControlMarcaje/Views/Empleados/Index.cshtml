@@ -9,49 +9,30 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.nombre_completo)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.telefono)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.direccion)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ultimo_marcaje)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.activo)
-        </th>
-        <th></th>
-    </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
+<h2>Marcajes</h2>
+
+<br />
+<input type="text" id="buscar" placeholder="Buscar.." class="form-control" />
+<br />
+<div class="list-group" id="empleados">
+    @foreach (var item in Model)
+    {
+        <a class="list-group-item list-group-item-action" href="@Url.Action("Index", "Marcajes", new { item.num_empleado })">
             @Html.DisplayFor(modelItem => item.nombre_completo)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.telefono)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.direccion)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ultimo_marcaje)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.activo)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.num_empleado }) |
-            @Html.ActionLink("Details", "Details", new { id=item.num_empleado }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.num_empleado })
-        </td>
-    </tr>
-}
+        </a>
+    }
+</div>
 
-</table>
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $("#buscar").on("keyup", function () {
+                var value = $(this).val().toLowerCase();
+                $("#empleados a").filter(function () {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+        });
+    </script>
+}
