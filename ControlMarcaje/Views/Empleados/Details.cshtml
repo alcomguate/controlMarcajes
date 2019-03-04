@@ -1,17 +1,24 @@
 ﻿@model ControlMarcaje.Models.Empleado
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Control de marcajes";
 }
 
-<h2>Details</h2>
+<h2>Detalle de empleados</h2>
 
 <div>
-    <h4>Empleado</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.nombre_completo)
+            <b class="control-label col-md-2">Número de empleado:</b>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.num_empleado)
+        </dd>
+
+        <dt>
+            <b class="control-label col-md-2">Nombre completo:</b>
         </dt>
 
         <dd>
@@ -19,7 +26,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.telefono)
+            <b class="control-label col-md-2">Teléfono:</b>
         </dt>
 
         <dd>
@@ -27,7 +34,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.direccion)
+            <b class="control-label col-md-2">Dirección:</b>
         </dt>
 
         <dd>
@@ -35,15 +42,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.ultimo_marcaje)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ultimo_marcaje)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.activo)
+            <b class="control-label col-md-2">Activo:</b>
         </dt>
 
         <dd>
@@ -53,6 +52,6 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.num_empleado }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Modificar", "Edit", new { id = Model.num_empleado }) |
+    @Html.ActionLink("Volver", "Index")
 </p>

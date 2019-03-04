@@ -14,8 +14,12 @@ namespace ControlMarcaje.Controllers
         ApiEmpleadosController apiEmpleados = new ApiEmpleadosController();
         
         
-        public ActionResult Index(int num_empleado)
+        public ActionResult Index(int? num_empleado)
         {
+            if (num_empleado == null)
+            {
+                return RedirectToAction("Index", "Empleados");
+            }
             IEnumerable<Marcaje> marcajesByEmpleado = apiMarcajes.GetMarcajes().ToList().
                 Where(x => x.empleado == num_empleado && x.dia_laboral.Value.ToShortDateString().Equals(DateTime.Now.ToShortDateString()));
 

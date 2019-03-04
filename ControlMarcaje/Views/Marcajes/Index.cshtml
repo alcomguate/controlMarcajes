@@ -12,6 +12,15 @@
 <br />
 
 <div class="row">
+    <div class="col-lg-12">
+        <input type="hidden" value="@Html.DisplayFor(model => model.FirstOrDefault().empleado)" name="id" />
+        <a class="btn btn-info" href="@Url.Action("Details/" + @Html.DisplayFor(model => model.FirstOrDefault().empleado), "Empleados")">
+            Ver detalles
+        </a>
+    </div>
+</div>
+<br />
+<div class="row">
     <div class="col-sm-3">
         <div class="card text-center">
             <img src="http://chittagongit.com//images/entrance-icon-png/entrance-icon-png-24.jpg" class="card-img-top" alt="Entrada">
