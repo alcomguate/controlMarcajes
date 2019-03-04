@@ -17,9 +17,9 @@ namespace ControlMarcaje.Controllers
         public ActionResult Index(int num_empleado)
         {
             IEnumerable<Marcaje> marcajesByEmpleado = apiMarcajes.GetMarcajes().ToList().
-                Where(x => x.Empleado1.num_empleado == num_empleado && x.dia_laboral.Value.ToShortDateString().Equals(DateTime.Now.ToShortDateString()));
+                Where(x => x.empleado == num_empleado && x.dia_laboral.Value.ToShortDateString().Equals(DateTime.Now.ToShortDateString()));
 
-            if (marcajesByEmpleado.GetEnumerator().Current == null)
+            if (marcajesByEmpleado.Count() == 0)
             {
                 Marcaje marcaje = new Marcaje();
                 marcaje.dia_laboral = DateTime.Now;
@@ -27,7 +27,8 @@ namespace ControlMarcaje.Controllers
                 apiMarcajes.PostMarcaje(marcaje);
 
                 marcajesByEmpleado = apiMarcajes.GetMarcajes().ToList().
-                                Where(x => x.Empleado1.num_empleado == num_empleado && x.dia_laboral.Value.ToShortDateString().Equals(DateTime.Now.ToShortDateString()));
+                                Where(x => x.empleado == num_empleado && 
+                                x.dia_laboral.Value.ToShortDateString().Equals(DateTime.Now.ToShortDateString()));
             }
 
             return View(marcajesByEmpleado);
@@ -47,12 +48,34 @@ namespace ControlMarcaje.Controllers
 
         // POST: Marcajes/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(string num_empleado, string accion)
         {
             try
             {
-                // TODO: Add insert logic here
-
+                int empleado = int.Parse(num_empleado);
+                Marcaje marcaje = apiMarcajes.GetMarcajes().ToList().
+                    Where(x => x.empleado == empleado && 
+                    x.dia_laboral.Value.ToShortDateString().Equals(DateTime.Now.ToShortDateString())).FirstOrDefault();
+                switch (accion)
+                {
+                    case "hora_entrada":
+                        TimeSpan hora_entrada = DateTime.Now.TimeOfDay;
+                        marcaje.hora_entrada = hora_entrada;
+                        break;
+                    case "hora_entrada_almuerzo":
+                        TimeSpan hora_entrada_almuerzo = DateTime.Now.TimeOfDay;
+                        marcaje.hora_entrada_almuerzo = hora_entrada_almuerzo;
+                        break;
+                    case "hora_salida_almuerzo":
+                        TimeSpan hora_salida_almuerzo = DateTime.Now.TimeOfDay;
+                        marcaje.hora_salida_almuerzo = hora_salida_almuerzo;
+                        break;
+                    case "hora_salida":
+                        TimeSpan hora_salida = DateTime.Now.TimeOfDay;
+                        marcaje.hora_salida = hora_salida;
+                        break;
+                }
+                apiMarcajes.PutMarcaje(marcaje.id, marcaje);
                 return RedirectToAction("Index");
             }
             catch
